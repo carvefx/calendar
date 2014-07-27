@@ -40,8 +40,21 @@ class Week
    */
   private function setStartDate(Day $date_start)
   {
+    $day_of_week = $date_start->dayOfWeek;
+    if($day_of_week != 1) {
+      $date_start->subDays($day_of_week);
+    }
+
     $this->date_start = $date_start;
     $this->addDay($date_start);
+  }
+
+  /**
+   * @return Day
+   */
+  public function getStartDate()
+  {
+    return $this->date_start;
   }
 
   /**

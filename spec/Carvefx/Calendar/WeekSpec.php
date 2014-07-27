@@ -24,6 +24,14 @@ class WeekSpec extends ObjectBehavior
     $this->getCurrentMonth()->shouldBe(7);
   }
 
+  function it_detects_if_the_starting_day_is_not_the_first_day_of_the_week()
+  {
+    $start = new Day(2014, 7, 1);
+    $this->beConstructedWith($start, $current_month = false);
+    $this->getStartDate()->toDateString()->shouldBe('2014-06-29');
+  }
+
+
   function it_sets_the_current_month_to_the_specified_value()
   {
     $start = new Day(2014, 7, 20);

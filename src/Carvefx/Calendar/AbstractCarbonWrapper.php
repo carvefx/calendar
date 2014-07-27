@@ -31,12 +31,11 @@ class AbstractCarbonWrapper
    */
   public function __call($method, $args)
   {
-    $result = call_user_func_array([$this->carbon, $method], $args);
-
-    if (!$this->isModifierMethod($method)) {
-      return $result;
+    if (! $this->isModifierMethod($method)) {
+      return call_user_func_array([$this->carbon, $method], $args);
     }
 
+    $this->carbon = call_user_func_array([$this->carbon, $method], $args);
     return $this;
   }
 
@@ -53,5 +52,15 @@ class AbstractCarbonWrapper
     }
 
     return false;
+  }
+
+
+  /**
+   * Force copy of the carbon object to
+   * avoid it being passed by reference.
+   */
+  public function __clone()
+  {
+    $this->carbon = clone $this->carbon;
   }
 }

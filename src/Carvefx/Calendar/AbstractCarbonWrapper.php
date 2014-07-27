@@ -31,7 +31,8 @@ class AbstractCarbonWrapper
    */
   public function __call($method, $args)
   {
-    $result = $this->carbon->$method($args);
+    $result = call_user_func_array([$this->carbon, $method], $args);
+
     if (!$this->isModifierMethod($method)) {
       return $result;
     }

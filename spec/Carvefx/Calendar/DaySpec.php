@@ -56,6 +56,7 @@ class DaySpec extends ObjectBehavior
 
   function it_does_not_return_the_carbon_object_when_applying_modifiers()
   {
-    $this->addDays(5)->shouldReturnAnInstanceOf('Carvefx\Calendar\Day');
+    $this->addDays(3)->shouldReturnAnInstanceOf('Carvefx\Calendar\Day');
+    $this->toDateString()->shouldBe('2014-07-30');
   }
 }

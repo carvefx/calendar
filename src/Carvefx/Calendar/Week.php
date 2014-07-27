@@ -41,6 +41,7 @@ class Week
 
   public function getDays()
   {
+    //var_dump($this->days);
     return $this->days;
   }
 }

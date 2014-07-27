@@ -1,0 +1,17 @@
+{
+  "name": "carvefx/calendar",
+  "description": "Simple PHP Calendar Library",
+  "keywords": ["calendar"],
+  "license": "MIT",
+  "require": {
+    "nesbot/carbon": "~1.0"
+  },
+  "require-dev" : {
+    "phpspec/phpspec": "2.0.*@dev"
+  },
+  "autoload": {
+    "psr-0": {
+        "Carvefx\\Calendar": "src"
+    }
+  }
+}

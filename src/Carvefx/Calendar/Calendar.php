@@ -7,11 +7,16 @@ use Carbon\Carbon;
 class Calendar
 {
 
+  /**
+   * The number of days a week has
+   */
   const DAYS_IN_WEEK = 7;
 
+  /**
+   * The number of weeks a calendar month displays
+   * (This includes blank days from other months)
+   */
   const WEEKS_IN_MONTH = 6;
-
-  const DAY_SLOTS_IN_MONTH = 42;
 
   /**
    * @var

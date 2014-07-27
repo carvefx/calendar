@@ -70,6 +70,26 @@ class Day
    */
   public function __call($method, $args)
   {
-    return $this->carbon->$method($args);
+    $result = $this->carbon->$method($args);
+    if(! $this->isModifierMethod($method)) {
+      return $result;
+    }
+
+    return $this;
+  }
+
+  /**
+   * @param $method
+   * @return bool
+   */
+  private function isModifierMethod($method)
+  {
+    $pattern = '/^add|^sub/';
+    preg_match($pattern, $method, $matches);
+    if (count($matches)) {
+      return true;
+    }
+
+    return false;
   }
 }

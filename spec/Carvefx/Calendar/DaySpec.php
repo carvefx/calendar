@@ -46,4 +46,16 @@ class DaySpec extends ObjectBehavior
     $this->shouldThrow('\InvalidArgumentException')->duringSetBlankDay(1999);
     $this->shouldThrow('\InvalidArgumentException')->duringSetBlankDay('1');
   }
+
+  function it_returns_true_if_today()
+  {
+    $today = Carbon::now();
+    $this->beConstructedWith($today->year, $today->month, $today->day);
+    $this->isToday()->shouldReturn(true);
+  }
+
+  function it_does_not_return_the_carbon_object_when_applying_modifiers()
+  {
+    $this->addDays(5)->shouldReturnAnInstanceOf('Carvefx\Calendar\Day');
+  }
 }

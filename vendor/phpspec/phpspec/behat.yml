@@ -1,5 +1,0 @@
-default:
-  filters:
-    tags: "~@wip"
-  formatter:
-    name: progress

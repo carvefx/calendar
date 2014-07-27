@@ -4,13 +4,8 @@ namespace Carvefx\Calendar;
 
 use Carbon\Carbon;
 
-class Day
+class Day extends AbstractCarbonWrapper
 {
-  /**
-   * @var \Carbon\Carbon
-   */
-  private $carbon;
-
   /**
    * @var bool
    */
@@ -50,26 +45,5 @@ class Day
   public function isBlankDay()
   {
     return $this->blank_day;
-  }
-
-  /**
-   * Attempts to query Carbon for the property
-   * @param $prop
-   * @return \DateTimeZone|int|string
-   */
-  public function __get($prop)
-  {
-    return $this->carbon->$prop;
-  }
-
-  /**
-   * Attempts to query Carbon for the property
-   * @param $method
-   * @param $args
-   * @return mixed
-   */
-  public function __call($method, $args)
-  {
-    return $this->carbon->$method($args);
   }
 }

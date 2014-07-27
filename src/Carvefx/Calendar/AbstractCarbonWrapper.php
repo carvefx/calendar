@@ -4,7 +4,7 @@
 namespace Carvefx\Calendar;
 
 
-class AbstractCarbonWrapper
+abstract class AbstractCarbonWrapper
 {
   /**
    * @var \Carbon\Carbon

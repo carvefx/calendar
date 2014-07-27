@@ -4,6 +4,9 @@ namespace Carvefx\Calendar;
 
 class Week
 {
+  /**
+   * Total number of days in a week
+   */
   const DAYS_IN_WEEK = 7;
 
   /**
@@ -16,6 +19,9 @@ class Week
    */
   private $days = [];
 
+  /**
+   * @param Day $date_start
+   */
   public function __construct(Day $date_start)
   {
     $this->setStartDate($date_start);
@@ -31,6 +37,9 @@ class Week
     $this->days[] = $date_start;
   }
 
+  /**
+   * Generates a week from the specified start date
+   */
   private function generateWeek()
   {
     $curr_date = clone $this->date_start;
@@ -39,9 +48,11 @@ class Week
     }
   }
 
+  /**
+   * @return array
+   */
   public function getDays()
   {
-    //var_dump($this->days);
     return $this->days;
   }
 }

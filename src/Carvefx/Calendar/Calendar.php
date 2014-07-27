@@ -8,11 +8,6 @@ class Calendar
 {
 
   /**
-   * The number of days a week has
-   */
-  const DAYS_IN_WEEK = 7;
-
-  /**
    * The number of weeks a calendar month displays
    * (This includes blank days from other months)
    */
@@ -61,21 +56,11 @@ class Calendar
   }
 
   /**
-   * @return static
+   * @return Day
    */
   public function getFirstDay()
   {
-    return $this->getFirstDayByYearMonth($this->year, $this->month);
-  }
-
-  /**
-   * @param $year
-   * @param $month
-   * @return static
-   */
-  public function getFirstDayByYearMonth($year, $month)
-  {
-    return Carbon::create($year, $month, 1, 0);
+    return new Day($this->year, $this->month, 1);
   }
 
   /**
@@ -83,21 +68,11 @@ class Calendar
    */
   public function getLastDay()
   {
-    return $this->getLastDayByYearMonth($this->year, $this->month);
-  }
+    $start = $this->getFirstDay();
+    $last = $start->daysInMonth;
+    $end = $start->setDate($this->year, $this->month, $last);
 
-  /**
-   * @param $year
-   * @param $month
-   * @return \Carbon\Carbon
-   */
-  public function getLastDayByYearMonth($year, $month)
-  {
-    $date = Carbon::create($year, $month, 1, 0);
-    $last = $date->daysInMonth;
-    $date->setDate($year, $month, $last, 0);
-
-    return $date;
+    return $end;
   }
 
   /**

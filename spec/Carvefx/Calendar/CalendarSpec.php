@@ -148,24 +148,10 @@ class CalendarSpec extends ObjectBehavior
     $returned_date->toDateTimeString()->shouldBe($date->toDateTimeString());
   }
 
-  function it_retuns_the_date_for_the_first_day_of_a_specific_month()
-  {
-    $date = Carbon::create(2014, 7, 1, 0);
-    $returned_date = $this->getFirstDayByYearMonth(2014, 7);
-    $returned_date->toDateTimeString()->shouldBe($date->toDateTimeString());
-  }
-
   function it_returns_the_date_for_the_last_day()
   {
     $date = Carbon::create(2014, 7, 31, 0);
     $returned_date = $this->getLastDay();
-    $returned_date->toDateTimeString()->shouldBe($date->toDateTimeString());
-  }
-
-  function it_retuns_the_date_for_the_last_day_of_a_specific_month()
-  {
-    $date = Carbon::create(2014, 7, 31, 0);
-    $returned_date = $this->getLastDayByYearMonth(2014, 7);
     $returned_date->toDateTimeString()->shouldBe($date->toDateTimeString());
   }
 

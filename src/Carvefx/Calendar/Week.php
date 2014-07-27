@@ -20,11 +20,18 @@ class Week
   private $days = [];
 
   /**
-   * @param Day $date_start
+   * @var bool|mixed
    */
-  public function __construct(Day $date_start)
+  private $current_month;
+
+  /**
+   * @param Day   $date_start
+   * @param mixed $current_month
+   */
+  public function __construct(Day $date_start, $current_month = false)
   {
     $this->setStartDate($date_start);
+    $this->setCurrentMonth($current_month);
     $this->generateWeek();
   }
 
@@ -34,7 +41,27 @@ class Week
   private function setStartDate(Day $date_start)
   {
     $this->date_start = $date_start;
-    $this->days[] = $date_start;
+    $this->addDay($date_start);
+  }
+
+  /**
+   * @param $current_month
+   */
+  private function setCurrentMonth($current_month)
+  {
+    if (!$current_month) {
+      $this->current_month = $this->date_start->month;
+    } else {
+      $this->current_month = $current_month;
+    }
+  }
+
+  /**
+   * @return bool|mixed
+   */
+  public function getCurrentMonth()
+  {
+    return $this->current_month;
   }
 
   /**
@@ -42,10 +69,27 @@ class Week
    */
   private function generateWeek()
   {
-    $curr_date = clone $this->date_start;
-    for($day = 1; $day < self::DAYS_IN_WEEK; $day++) {
-      $this->days[] = $curr_date->addDays(1);
+    $date = clone $this->date_start;
+    for ($day = 1; $day < self::DAYS_IN_WEEK; $day++) {
+      $curr_day = clone $date->addDays(1);
+      $this->addDay($curr_day);
     }
+  }
+
+  /**
+   * Adds a day to the days property
+   * Goes through a check first
+   * @param Day $day
+   */
+  private function addDay(Day $day)
+  {
+    if(! $this->currentMonthDay($day)) {
+      $day->setBlankDay(true);
+    } else {
+      $day->setBlankDay(false);
+    }
+
+    $this->days[] = $day;
   }
 
   /**
@@ -54,5 +98,20 @@ class Week
   public function getDays()
   {
     return $this->days;
+  }
+
+  /**
+   * Determines whether a day is part of the currently
+   * selected month or not
+   * @param Day $day
+   * @return bool
+   */
+  public function currentMonthDay(Day $day)
+  {
+    if ($day->month == $this->getCurrentMonth()) {
+      return true;
+    }
+
+    return false;
   }
 }

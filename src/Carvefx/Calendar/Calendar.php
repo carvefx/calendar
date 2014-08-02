@@ -23,6 +23,12 @@ class Calendar
    */
   private $year;
 
+  public function __construct($year, $month)
+  {
+    $this->setYear($year);
+    $this->setMonth($month);
+  }
+
   /**
    * @param mixed $month
    */

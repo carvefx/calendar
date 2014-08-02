@@ -32,6 +32,7 @@ class Week
   {
     $this->setStartDate($date_start);
     $this->setCurrentMonth($current_month);
+    $this->addDay($this->date_start);
     $this->generateWeek();
   }
 
@@ -46,7 +47,6 @@ class Week
     }
 
     $this->date_start = $date_start;
-    $this->addDay($date_start);
   }
 
   /**

@@ -16,8 +16,7 @@ class CalendarSpec extends ObjectBehavior
 
   function let()
   {
-    $this->setYear(2014);
-    $this->setMonth(7);
+    $this->beConstructedWith(2014, 7);
   }
 
   function it_returns_the_weeks_for_a_month()

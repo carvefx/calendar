@@ -2,13 +2,10 @@
 
 namespace Carvefx\Calendar;
 
+use Carbon\Carbon;
+
 class Week
 {
-  /**
-   * Total number of days in a week
-   */
-  const DAYS_IN_WEEK = 7;
-
   /**
    * @var Day
    */
@@ -83,7 +80,7 @@ class Week
   private function generateWeek()
   {
     $date = clone $this->date_start;
-    for ($day = 1; $day < self::DAYS_IN_WEEK; $day++) {
+    for ($day = 1; $day < Carbon::DAYS_PER_WEEK; $day++) {
       $curr_day = clone $date->addDays(1);
       $this->addDay($curr_day);
     }

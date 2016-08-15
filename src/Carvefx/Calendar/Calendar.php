@@ -11,12 +11,12 @@ class Calendar
   const WEEKS_IN_MONTH = 6;
 
   /**
-   * @var
+   * @var int
    */
   private $month;
 
   /**
-   * @var
+   * @var int
    */
   private $year;
 
@@ -27,7 +27,7 @@ class Calendar
   }
 
   /**
-   * @param mixed $month
+   * @param int $month
    */
   public function setMonth($month)
   {
@@ -35,7 +35,7 @@ class Calendar
   }
 
   /**
-   * @return mixed
+   * @return int
    */
   public function getMonth()
   {
@@ -43,7 +43,7 @@ class Calendar
   }
 
   /**
-   * @param mixed $year
+   * @param int $year
    */
   public function setYear($year)
   {
@@ -51,7 +51,7 @@ class Calendar
   }
 
   /**
-   * @return mixed
+   * @return int
    */
   public function getYear()
   {

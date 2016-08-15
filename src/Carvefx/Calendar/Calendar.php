@@ -74,10 +74,8 @@ class Calendar
   public function getLastDay()
   {
     $start = $this->getFirstDay();
-    $last = $start->daysInMonth;
-    $end = $start->setDate($this->year, $this->month, $last);
 
-    return $end;
+    return $start->endOfMonth()->startOfDay();
   }
 
   /**

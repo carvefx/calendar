@@ -2,8 +2,6 @@
 
 namespace Carvefx\Calendar;
 
-use Carbon\Carbon;
-
 class Calendar
 {
   /**

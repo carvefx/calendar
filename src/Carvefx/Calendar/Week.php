@@ -93,11 +93,7 @@ class Week
    */
   private function addDay(Day $day)
   {
-    if(! $this->currentMonthDay($day)) {
-      $day->setBlankDay(true);
-    } else {
-      $day->setBlankDay(false);
-    }
+    $day->setBlankDay(! $this->currentMonthDay($day));
 
     $this->days[] = $day;
   }
@@ -118,10 +114,6 @@ class Week
    */
   public function currentMonthDay(Day $day)
   {
-    if ($day->month == $this->getCurrentMonth()) {
-      return true;
-    }
-
-    return false;
+    return $day->month === $this->getCurrentMonth();
   }
 }

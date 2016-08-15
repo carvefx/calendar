@@ -28,9 +28,14 @@ class Calendar
 
   /**
    * @param int $month
+   * @throws \InvalidArgumentException
    */
   public function setMonth($month)
   {
+    if (! is_int($month)) {
+      throw new \InvalidArgumentException('setMonth requires an integer value');
+    }
+
     $this->month = $month;
   }
 
@@ -44,9 +49,14 @@ class Calendar
 
   /**
    * @param int $year
+   * @throws \InvalidArgumentException
    */
   public function setYear($year)
   {
+    if (! is_int($year)) {
+      throw new \InvalidArgumentException('setYear requires an integer value');
+    }
+
     $this->year = $year;
   }
 

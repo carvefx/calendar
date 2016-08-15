@@ -23,7 +23,7 @@ class CalendarSpec extends ObjectBehavior
   {
     $weeks = $this->getWeeks();
     $weeks->shouldBeArray();
-    $weeks->shouldHaveCount(5);
+    $weeks->shouldHaveCount(6);
 
     $weeks[0]->shouldBeAnInstanceOf('Carvefx\Calendar\Week');
     $days = $weeks[0]->getDays();

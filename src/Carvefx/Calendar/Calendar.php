@@ -6,7 +6,6 @@ use Carbon\Carbon;
 
 class Calendar
 {
-
   /**
    * The number of weeks a calendar month displays
    * (This includes blank days from other months)
@@ -86,13 +85,12 @@ class Calendar
    */
   public function getWeeks()
   {
-    $last_day = $this->getLastDay();
-    $last_week = $last_day->weekOfMonth;
     $first_day = $this->getFirstDay();
+    $last_day = $this->getLastDay();
 
     $weeks = [];
-    for($week = 1; $week <= $last_week; $week++) {
-      $curr_week = new Week(clone $first_day, $first_day->month);
+    for($week = 1; $week <= self::WEEKS_IN_MONTH; $week++) {
+      $curr_week = new Week(clone $first_day, $last_day->month);
       $weeks[] = $curr_week;
       $first_day->addDays(7);
     }

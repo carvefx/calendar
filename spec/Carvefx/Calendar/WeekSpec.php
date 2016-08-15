@@ -16,7 +16,7 @@ class WeekSpec extends ObjectBehavior
   function let()
   {
     $start = new Day(2014, 7, 20);
-    $this->beConstructedWith($start, $current_month = false);
+    $this->beConstructedWith($start, $current_month = null);
   }
 
   function it_sets_the_current_month_to_the_start_dates_month_if_none_is_specified()
@@ -27,7 +27,7 @@ class WeekSpec extends ObjectBehavior
   function it_detects_if_the_starting_day_is_not_the_first_day_of_the_week()
   {
     $start = new Day(2014, 7, 1);
-    $this->beConstructedWith($start, $current_month = false);
+    $this->beConstructedWith($start, $current_month = null);
     $this->getStartDate()->toDateString()->shouldBe('2014-06-29');
   }
 

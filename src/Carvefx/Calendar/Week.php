@@ -17,7 +17,7 @@ class Week
   private $days = [];
 
   /**
-   * @var bool|mixed
+   * @var int
    */
   private $current_month;
 
@@ -25,7 +25,7 @@ class Week
    * @param Day   $date_start
    * @param mixed $current_month
    */
-  public function __construct(Day $date_start, $current_month = false)
+  public function __construct(Day $date_start, $current_month = null)
   {
     $this->setStartDate($date_start);
     $this->setCurrentMonth($current_month);
@@ -59,7 +59,7 @@ class Week
    */
   private function setCurrentMonth($current_month)
   {
-    if (!$current_month) {
+    if ($current_month === null) {
       $this->current_month = $this->date_start->month;
     } else {
       $this->current_month = $current_month;

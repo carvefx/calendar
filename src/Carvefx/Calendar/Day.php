@@ -12,9 +12,9 @@ class Day extends AbstractCarbonWrapper
   private $blank_day = false;
 
   /**
-   * @param $year
-   * @param $month
-   * @param $day
+   * @param int $year
+   * @param int $month
+   * @param int $day
    */
   public function __construct($year, $month, $day)
   {
@@ -23,7 +23,7 @@ class Day extends AbstractCarbonWrapper
   }
 
   /**
-   * @param $value
+   * @param bool $value
    * @throws \InvalidArgumentException
    */
   public function setBlankDay($value)

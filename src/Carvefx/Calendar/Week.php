@@ -2,13 +2,10 @@
 
 namespace Carvefx\Calendar;
 
+use Carbon\Carbon;
+
 class Week
 {
-  /**
-   * Total number of days in a week
-   */
-  const DAYS_IN_WEEK = 7;
-
   /**
    * @var Day
    */
@@ -20,7 +17,7 @@ class Week
   private $days = [];
 
   /**
-   * @var bool|mixed
+   * @var int
    */
   private $current_month;
 
@@ -28,7 +25,7 @@ class Week
    * @param Day   $date_start
    * @param mixed $current_month
    */
-  public function __construct(Day $date_start, $current_month = false)
+  public function __construct(Day $date_start, $current_month = null)
   {
     $this->setStartDate($date_start);
     $this->setCurrentMonth($current_month);
@@ -42,7 +39,7 @@ class Week
   private function setStartDate(Day $date_start)
   {
     $day_of_week = $date_start->dayOfWeek;
-    if($day_of_week != 1) {
+    if($day_of_week !== Carbon::SUNDAY) {
       $date_start->subDays($day_of_week);
     }
 
@@ -62,7 +59,7 @@ class Week
    */
   private function setCurrentMonth($current_month)
   {
-    if (!$current_month) {
+    if ($current_month === null) {
       $this->current_month = $this->date_start->month;
     } else {
       $this->current_month = $current_month;
@@ -83,7 +80,7 @@ class Week
   private function generateWeek()
   {
     $date = clone $this->date_start;
-    for ($day = 1; $day < self::DAYS_IN_WEEK; $day++) {
+    for ($day = 1; $day < Carbon::DAYS_PER_WEEK; $day++) {
       $curr_day = clone $date->addDays(1);
       $this->addDay($curr_day);
     }
@@ -96,11 +93,7 @@ class Week
    */
   private function addDay(Day $day)
   {
-    if(! $this->currentMonthDay($day)) {
-      $day->setBlankDay(true);
-    } else {
-      $day->setBlankDay(false);
-    }
+    $day->setBlankDay(! $this->currentMonthDay($day));
 
     $this->days[] = $day;
   }
@@ -121,10 +114,6 @@ class Week
    */
   public function currentMonthDay(Day $day)
   {
-    if ($day->month == $this->getCurrentMonth()) {
-      return true;
-    }
-
-    return false;
+    return $day->month === $this->getCurrentMonth();
   }
 }

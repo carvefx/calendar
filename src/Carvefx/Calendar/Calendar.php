@@ -2,11 +2,8 @@
 
 namespace Carvefx\Calendar;
 
-use Carbon\Carbon;
-
 class Calendar
 {
-
   /**
    * The number of weeks a calendar month displays
    * (This includes blank days from other months)
@@ -14,12 +11,12 @@ class Calendar
   const WEEKS_IN_MONTH = 6;
 
   /**
-   * @var
+   * @var int
    */
   private $month;
 
   /**
-   * @var
+   * @var int
    */
   private $year;
 
@@ -30,15 +27,20 @@ class Calendar
   }
 
   /**
-   * @param mixed $month
+   * @param int $month
+   * @throws \InvalidArgumentException
    */
   public function setMonth($month)
   {
+    if (! is_int($month)) {
+      throw new \InvalidArgumentException('setMonth requires an integer value');
+    }
+
     $this->month = $month;
   }
 
   /**
-   * @return mixed
+   * @return int
    */
   public function getMonth()
   {
@@ -46,15 +48,20 @@ class Calendar
   }
 
   /**
-   * @param mixed $year
+   * @param int $year
+   * @throws \InvalidArgumentException
    */
   public function setYear($year)
   {
+    if (! is_int($year)) {
+      throw new \InvalidArgumentException('setYear requires an integer value');
+    }
+
     $this->year = $year;
   }
 
   /**
-   * @return mixed
+   * @return int
    */
   public function getYear()
   {
@@ -75,10 +82,8 @@ class Calendar
   public function getLastDay()
   {
     $start = $this->getFirstDay();
-    $last = $start->daysInMonth;
-    $end = $start->setDate($this->year, $this->month, $last);
 
-    return $end;
+    return $start->endOfMonth()->startOfDay();
   }
 
   /**
@@ -86,13 +91,12 @@ class Calendar
    */
   public function getWeeks()
   {
-    $last_day = $this->getLastDay();
-    $last_week = $last_day->weekOfMonth;
     $first_day = $this->getFirstDay();
+    $last_day = $this->getLastDay();
 
     $weeks = [];
-    for($week = 1; $week <= $last_week; $week++) {
-      $curr_week = new Week(clone $first_day, $first_day->month);
+    for($week = 1; $week <= self::WEEKS_IN_MONTH; $week++) {
+      $curr_week = new Week(clone $first_day, $last_day->month);
       $weeks[] = $curr_week;
       $first_day->addDays(7);
     }

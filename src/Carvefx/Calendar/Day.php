@@ -15,7 +15,7 @@ class Day extends AbstractCarbonWrapper
      * @param int $year
      * @param int $month
      * @param int $day
-     * @param string $timezone
+     * @param \DateTimeZone|string $timezone
      */
     public function __construct($year, $month, $day, $timezone = 'UTC')
     {

@@ -89,9 +89,9 @@ class Calendar
 
         if ($timezone instanceof \DateTimeZone) {
             $this->timezone = $timezone;
+        } else {
+            $this->timezone = new \DateTimeZone($timezone);
         }
-
-        $this->timezone = new \DateTimeZone($timezone);
     }
 
     /**

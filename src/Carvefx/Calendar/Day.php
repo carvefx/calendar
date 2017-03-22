@@ -15,10 +15,11 @@ class Day extends AbstractCarbonWrapper
      * @param int $year
      * @param int $month
      * @param int $day
+     * @param string $timezone
      */
-    public function __construct($year, $month, $day)
+    public function __construct($year, $month, $day, $timezone = 'UTC')
     {
-        $this->carbon = Carbon::create($year, $month, $day, 0);
+        $this->carbon = Carbon::create($year, $month, $day, 0, 0, 0, $timezone);
 
         return $this;
     }

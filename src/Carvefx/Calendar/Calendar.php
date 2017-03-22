@@ -20,10 +20,16 @@ class Calendar
      */
     private $year;
 
-    public function __construct($year, $month)
+    /**
+     * @var \DateTimeZone
+     */
+    private $timezone;
+
+    public function __construct($year, $month, $timezone = 'UTC')
     {
         $this->setYear($year);
         $this->setMonth($month);
+        $this->setTimezone($timezone);
     }
 
     /**
@@ -71,11 +77,37 @@ class Calendar
     }
 
     /**
+     * @param \DateTimeZone|string $timezone
+     *
+     * @throws \InvalidArgumentException
+     */
+    public function setTimezone($timezone)
+    {
+        if (! ($timezone instanceof \DateTimeZone || is_string($timezone))) {
+            throw new \InvalidArgumentException('setTimezone requires a DateTimeZone instance or a timezone string');
+        }
+
+        if ($timezone instanceof \DateTimeZone) {
+            $this->timezone = $timezone;
+        }
+
+        $this->timezone = new \DateTimeZone($timezone);
+    }
+
+    /**
+     * @return \DateTimeZone
+     */
+    public function getTimezone()
+    {
+        return $this->timezone;
+    }
+
+    /**
      * @return Day
      */
     public function getFirstDay()
     {
-        return new Day($this->year, $this->month, 1);
+        return new Day($this->year, $this->month, 1, $this->timezone);
     }
 
     /**

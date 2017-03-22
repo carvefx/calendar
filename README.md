@@ -8,7 +8,7 @@ calendar
 Calendar Library written in PHP
 
 ## Usage
- 
+
 ```
 require('vendor/autoload.php');
 
@@ -17,10 +17,10 @@ use Carvefx\Calendar\Calendar;
 $calendar = new Calendar(2014, 8);
 
 foreach($calendar->getWeeks() as $week) {
-  foreach($week->getDays() as $day) {
-    $day->toDateString(); // 2014-07-27
-    $day->isBlankDay(); // true
-  }
+    foreach($week->getDays() as $day) {
+        $day->toDateString(); // 2014-07-27
+        $day->isBlankDay(); // true
+    }
 }
 ```
 
@@ -50,7 +50,6 @@ $day->month; // 7
 $first_day = new Day(2014, 07, 01);
 $week = new Week($first_day); // constructor requires the day the week starts at
 $week->getDays(); // will result in an array containing 7 Day objects
-
 ```
 
 
@@ -63,5 +62,4 @@ $calendar->setMonth(7);
 $calendar->getFirstDay(); // returns the first day of the month
 $calendar->getLastDay(); // returns the last day of tyhe month
 $calendar->getWeeks() // results in a number of Week objects
-
 ```

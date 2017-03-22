@@ -1,27 +1,27 @@
 {
-  "name": "carvefx/calendar",
-  "type": "library",
-  "description": "Simple PHP Calendar Library",
-  "keywords": ["calendar"],
-  "license": "MIT",
-  "authors": [
-      {
-          "name": "Adrian Mihai",
-          "email": "adrian@carve.ro",
-          "homepage": "http://www.carve.ro",
-          "role": "Developer"
-      }
-  ],
-  "require": {
-    "php": ">=5.4",
-    "nesbot/carbon": "~1.0"
-  },
-  "require-dev" : {
-    "phpspec/phpspec": "2.0.*@dev"
-  },
-  "autoload": {
-    "psr-0": {
-        "Carvefx\\Calendar": "src"
+    "name": "carvefx/calendar",
+    "type": "library",
+    "description": "Simple PHP Calendar Library",
+    "keywords": ["calendar"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Adrian Mihai",
+            "email": "adrian@carve.ro",
+            "homepage": "http://www.carve.ro",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.6",
+        "nesbot/carbon": "~1.0"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "2.0.*@dev"
+    },
+    "autoload": {
+        "psr-0": {
+            "Carvefx\\Calendar": "src"
+        }
     }
-  }
 }

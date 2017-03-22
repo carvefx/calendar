@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Carvefx\Calendar\Calendar;
 use Carvefx\Calendar\Day;
 use Carvefx\Calendar\Week;
+use DateTimeZone;
 use PhpSpec\ObjectBehavior;
 
 class CalendarSpec extends ObjectBehavior
@@ -19,6 +20,31 @@ class CalendarSpec extends ObjectBehavior
     public function let()
     {
         $this->beConstructedWith(2014, 7);
+    }
+
+    public function it_has_a_default_timezone()
+    {
+        $timezone = $this->getTimezone();
+        $timezone->shouldBeAnInstanceOf(DateTimeZone::class);
+        $timezone->getName()->shouldBe('UTC');
+    }
+
+    public function it_can_set_the_timezone_from_string()
+    {
+        $this->setTimezone('America/Chicago');
+
+        $timezone = $this->getTimezone();
+        $timezone->shouldBeAnInstanceOf(DateTimeZone::class);
+        $timezone->getName()->shouldBe('America/Chicago');
+    }
+
+    public function it_can_set_the_timezone_from_object()
+    {
+        $this->setTimezone(new DateTimeZone('America/Denver'));
+
+        $timezone = $this->getTimezone();
+        $timezone->shouldBeAnInstanceOf(DateTimeZone::class);
+        $timezone->getName()->shouldBe('America/Denver');
     }
 
     public function it_returns_the_weeks_for_a_month()

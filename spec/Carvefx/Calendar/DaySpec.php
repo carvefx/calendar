@@ -4,6 +4,7 @@ namespace spec\Carvefx\Calendar;
 
 use Carbon\Carbon;
 use Carvefx\Calendar\Day;
+use DateTimeZone;
 use PhpSpec\ObjectBehavior;
 
 class DaySpec extends ObjectBehavior
@@ -16,6 +17,12 @@ class DaySpec extends ObjectBehavior
     public function let()
     {
         $this->beConstructedWith(2014, 7, 27);
+    }
+
+    public function it_has_a_timezone()
+    {
+        $this->beConstructedWith(2017, 7, 27, new DateTimeZone('America/Chicago'));
+        $this->timezoneName->shouldBe('America/Chicago');
     }
 
     public function it_forwards_property_gets_to_carbon()

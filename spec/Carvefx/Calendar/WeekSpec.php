@@ -2,6 +2,7 @@
 
 namespace spec\Carvefx\Calendar;
 
+use Carbon\Carbon;
 use Carvefx\Calendar\Day;
 use Carvefx\Calendar\Week;
 use PhpSpec\ObjectBehavior;
@@ -87,5 +88,24 @@ class WeekSpec extends ObjectBehavior
 
         $days[2]->toDateString()->shouldBe('2014-07-01');
         $days[2]->isBlankDay()->shouldBe(false);
+    }
+
+    function it_starts_on_carbons_default_start_of_week() {
+        $start = new Day(2017, 5, 1);
+        $this->beConstructedWith($start, null);
+
+        $days = $this->getDays();
+        $days[0]->dayOfWeek->shouldBe(Carbon::MONDAY);
+    }
+
+    function it_starts_on_whatever_day_of_the_week_carbon_does() {
+        Carbon::setWeekStartsAt(Carbon::SUNDAY);
+        Carbon::setWeekEndsAt(Carbon::SATURDAY);
+
+        $start = new Day(2017, 10, 1);
+        $this->beConstructedWith($start, null);
+
+        $days = $this->getDays();
+        $days[0]->dayOfWeek->shouldBe(Carbon::SUNDAY);
     }
 }

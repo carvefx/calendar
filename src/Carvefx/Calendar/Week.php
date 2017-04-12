@@ -39,7 +39,7 @@ class Week
     private function setStartDate(Day $date_start)
     {
         $day_of_week = $date_start->dayOfWeek;
-        if ($day_of_week !== Carbon::SUNDAY) {
+        if ($day_of_week !== Carbon::getWeekStartsAt()) {
             $date_start->subDays($day_of_week);
         }
 

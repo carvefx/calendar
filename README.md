@@ -7,6 +7,27 @@ calendar
 
 Calendar Library written in PHP
 
+## Installation
+
+Add the following above the `require` block in your `composer.json`:
+
+```json
+"repositories": [
+    {
+        "type": "vcs",
+        "url": "https://github.com/kmdwebdesigns/calendar"
+    }
+],
+```
+
+Then run the following in your terminal:
+
+```bash
+$ composer require "carvefx/calendar:^1.1"
+```
+
+Or, add `"carvefx/calendar": "^1.1"` to your `composer.json` and then run `composer update` in your terminal.
+
 ## Usage
 
 ```php
@@ -62,10 +83,10 @@ $calendar = new Calendar(2014, 8, new DateTimeZone('America/Chicago'));
 $calendar->setYear(2015);
 $calendar->setMonth(7);
 $calendar->setTimezone($timezone); // where $timezone is either a bare timezone string, or a DateTimeZone object
-$calendar->getTimezone(); // returns the currently set timezone of the calendar
+$calendar->getTimezone(); // returns the currently set timezone of the calendar as a DateTimeZone object
 $calendar->getFirstDay(); // returns the first day of the month
-$calendar->getLastDay(); // returns the last day of tyhe month
-$calendar->getWeeks() // results in a number of Week objects
+$calendar->getLastDay(); // returns the last day of the month
+$calendar->getWeeks() // returns an array of Week objects
 ```
 
 ### `Week` API
@@ -73,7 +94,7 @@ $calendar->getWeeks() // results in a number of Week objects
 ```php
 $first_day = new Day(2014, 07, 01);
 $week = new Week($first_day); // constructor requires the day the week starts at
-$week->getDays(); // will result in an array containing 7 Day objects
+$week->getDays(); // returns an array containing 7 Day objects
 ```
 
 ### `Day` API

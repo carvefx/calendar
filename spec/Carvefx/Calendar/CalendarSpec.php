@@ -19,6 +19,9 @@ class CalendarSpec extends ObjectBehavior
 
     public function let()
     {
+        Carbon::setWeekStartsAt(Carbon::SUNDAY);
+        Carbon::setWeekEndsAt(Carbon::SATURDAY);
+
         $this->beConstructedWith(2014, 7);
     }
 

@@ -16,6 +16,9 @@ class WeekSpec extends ObjectBehavior
 
     function let()
     {
+        Carbon::setWeekStartsAt(Carbon::SUNDAY);
+        Carbon::setWeekEndsAt(Carbon::SATURDAY);
+
         $start = new Day(2014, 7, 20);
         $this->beConstructedWith($start, $current_month = null);
     }
@@ -90,19 +93,24 @@ class WeekSpec extends ObjectBehavior
         $days[2]->isBlankDay()->shouldBe(false);
     }
 
-    function it_starts_on_carbons_default_start_of_week() {
-        $start = new Day(2017, 5, 1);
+    function it_starts_on_carbons_default_start_of_week()
+    {
+        Carbon::setWeekStartsAt(Carbon::MONDAY);
+        Carbon::setWeekEndsAt(Carbon::SUNDAY);
+
+        $start = new Day(2017, 7, 1);
         $this->beConstructedWith($start, null);
 
         $days = $this->getDays();
         $days[0]->dayOfWeek->shouldBe(Carbon::MONDAY);
     }
 
-    function it_starts_on_whatever_day_of_the_week_carbon_does() {
+    function it_starts_on_whatever_day_of_the_week_carbon_does()
+    {
         Carbon::setWeekStartsAt(Carbon::SUNDAY);
         Carbon::setWeekEndsAt(Carbon::SATURDAY);
 
-        $start = new Day(2017, 10, 1);
+        $start = new Day(2017, 7, 1);
         $this->beConstructedWith($start, null);
 
         $days = $this->getDays();

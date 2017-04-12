@@ -38,12 +38,10 @@ class Week
      */
     private function setStartDate(Day $date_start)
     {
-        $day_of_week = $date_start->dayOfWeek;
-        if ($day_of_week !== Carbon::getWeekStartsAt()) {
-            $date_start->subDays($day_of_week);
-        }
+        /** @var Carbon $week_start */
+        $week_start = $date_start->startOfWeek();
 
-        $this->date_start = $date_start;
+        $this->date_start = new Day($week_start->year, $week_start->month, $week_start->day, $week_start->timezone);
     }
 
     /**

@@ -69,6 +69,32 @@ class CalendarSpec extends ObjectBehavior
         $days[6]->toDateString()->shouldReturn('2014-08-02');
     }
 
+    public function it_returns_only_the_necessary_number_of_weeks_for_a_month()
+    {
+        $this->beConstructedWith(2017, 8);
+        $this->setVariableWeeks(true);
+
+        $weeks = $this->getWeeks();
+        $weeks->shouldBeArray();
+        $weeks->shouldHaveCount(5);
+        $weeks[0]->shouldBeAnInstanceOf(Week::class);
+
+        $days = $weeks[0]->getDays();
+        $days->shouldBeArray();
+        $days->shouldHaveCount(7);
+        $days[0]->shouldBeAnInstanceOf(Day::class);
+        $days[0]->isBlankDay()->shouldReturn(true);
+        $days[0]->toDateString()->shouldReturn('2017-07-30');
+
+        $days[2]->shouldBeAnInstanceOf(Day::class);
+        $days[2]->isBlankDay()->shouldReturn(false);
+        $days[2]->toDateString()->shouldReturn('2017-08-01');
+
+        $days = $weeks[4]->getDays();
+        $days[6]->isBlankDay()->shouldReturn(true);
+        $days[6]->toDateString()->shouldReturn('2017-09-02');
+    }
+
     public function it_returns_the_date_for_the_first_day()
     {
         $date = Carbon::create(2014, 7, 1, 0);

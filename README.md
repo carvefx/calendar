@@ -41,6 +41,15 @@ By default, the calendar will start on Monday. You can set which day of the week
 $calendar = new Calendar(2014, 8); // First day of the week is now Sunday
 ```
 
+Also by default, the calendar will display 6 weeks no matter how many weeks the actual month needs. This can be configured with the `setVariableWeeks` method:
+
+```php
+$calendar = new Calendar(2017, 8);
+$calendar->setVariableWeeks(true);
+
+$calendar->getWeeks(); // returns 5 weeks, instead of the normal 6, because the last week contains all blank days
+```
+
 ### `Calendar` API
 
 ```php

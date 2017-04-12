@@ -25,6 +25,11 @@ class Calendar
      */
     private $timezone;
 
+    /**
+     * @var bool
+     */
+    private $variableWeeks = false;
+
     public function __construct($year, $month, $timezone = 'UTC')
     {
         $this->setYear($year);
@@ -103,6 +108,32 @@ class Calendar
     }
 
     /**
+     * @param bool $variableWeeks
+     */
+    public function setVariableWeeks(bool $variableWeeks)
+    {
+        $this->variableWeeks = $variableWeeks;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isVariableWeeks()
+    {
+        return $this->variableWeeks;
+    }
+
+    /**
+     * @param Day $firstDay
+     *
+     * @return int
+     */
+    protected function getWeekCount(Day $firstDay)
+    {
+        return 1 + ceil(($firstDay->daysInMonth - 7 + $firstDay->dayOfWeek) / 7);
+    }
+
+    /**
      * @return Day
      */
     public function getFirstDay()
@@ -127,9 +158,10 @@ class Calendar
     {
         $first_day = $this->getFirstDay();
         $last_day = $this->getLastDay();
+        $number_of_weeks = $this->isVariableWeeks() ? $this->getWeekCount($first_day) : self::WEEKS_IN_MONTH;
 
         $weeks = [];
-        for ($week = 1; $week <= self::WEEKS_IN_MONTH; $week++) {
+        for ($week = 1; $week <= $number_of_weeks; $week++) {
             $curr_week = new Week(clone $first_day, $last_day->month);
             $weeks[] = $curr_week;
             $first_day->addDays(7);

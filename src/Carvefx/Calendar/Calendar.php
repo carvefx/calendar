@@ -152,7 +152,7 @@ class Calendar
     }
 
     /**
-     * @return array
+     * @return Week[]
      */
     public function getWeeks()
     {

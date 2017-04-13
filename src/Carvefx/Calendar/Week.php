@@ -65,7 +65,7 @@ class Week
     }
 
     /**
-     * @return bool|mixed
+     * @return null|int
      */
     public function getCurrentMonth()
     {
@@ -98,7 +98,7 @@ class Week
     }
 
     /**
-     * @return array
+     * @return Day[]
      */
     public function getDays()
     {

@@ -1,6 +1,6 @@
-[![Code Climate](https://codeclimate.com/github/carvefx/calendar.png)](https://codeclimate.com/github/carvefx/calendar)
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/21f07ee7-f608-4a31-ae0e-d214dd962e4a/mini.png)](https://insight.sensiolabs.com/projects/21f07ee7-f608-4a31-ae0e-d214dd962e4a)
-[![Build Status](https://travis-ci.org/carvefx/calendar.svg?branch=master)](https://travis-ci.org/carvefx/calendar)
+[![Code Climate](https://codeclimate.com/github/kmdwebdesigns/calendar.png)](https://codeclimate.com/github/kmdwebdesigns/calendar)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/004f9246-a92c-479a-a0e0-4564fe43eaa5/mini.png)](https://insight.sensiolabs.com/projects/004f9246-a92c-479a-a0e0-4564fe43eaa5)
+[![Build Status](https://travis-ci.org/kmdwebdesigns/calendar.svg?branch=master)](https://travis-ci.org/kmdwebdesigns/calendar)
 
 calendar
 ========

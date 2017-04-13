@@ -2,6 +2,8 @@
 
 namespace Carvefx\Calendar;
 
+use Carbon\Carbon;
+
 class Calendar
 {
     /**
@@ -130,7 +132,9 @@ class Calendar
      */
     protected function getWeekCount(Day $firstDay)
     {
-        return 1 + ceil(($firstDay->daysInMonth - 7 + $firstDay->dayOfWeek) / 7);
+        $startOfWeek = Carbon::getWeekStartsAt();
+
+        return ceil(((($firstDay->dayOfWeek - $startOfWeek + 7) % 7) + $firstDay->daysInMonth) / 7);
     }
 
     /**

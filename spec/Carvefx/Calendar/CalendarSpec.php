@@ -95,6 +95,18 @@ class CalendarSpec extends ObjectBehavior
         $days[6]->toDateString()->shouldReturn('2017-09-02');
     }
 
+    public function it_can_return_a_variable_number_of_weeks()
+    {
+        $this->beConstructedWith(2017, 4);
+        $this->setVariableWeeks(true);
+
+        $weeks = $this->getWeeks();
+        $weeks->shouldBeArray();
+        $weeks->shouldHaveCount(6);
+        $this->getFirstDay()->toDateString()->shouldReturn('2017-04-01');
+        $this->getLastDay()->toDateString()->shouldReturn('2017-04-30');
+    }
+
     public function it_returns_the_date_for_the_first_day()
     {
         $date = Carbon::create(2014, 7, 1, 0);

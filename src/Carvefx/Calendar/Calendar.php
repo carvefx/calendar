@@ -112,7 +112,7 @@ class Calendar
     /**
      * @param bool $variableWeeks
      */
-    public function setVariableWeeks(bool $variableWeeks)
+    public function setVariableWeeks($variableWeeks)
     {
         $this->variableWeeks = $variableWeeks;
     }

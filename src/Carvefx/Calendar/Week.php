@@ -57,11 +57,7 @@ class Week
      */
     private function setCurrentMonth($currentMonth)
     {
-        if ($currentMonth === null) {
-            $this->currentMonth = $this->dateStart->month;
-        } else {
-            $this->currentMonth = $currentMonth;
-        }
+        $this->currentMonth = $currentMonth === null ? $this->dateStart->month : $currentMonth;
     }
 
     /**

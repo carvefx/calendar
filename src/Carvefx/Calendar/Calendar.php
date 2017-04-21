@@ -3,6 +3,7 @@
 namespace Carvefx\Calendar;
 
 use Carbon\Carbon;
+use DateTimeZone;
 
 class Calendar
 {
@@ -90,15 +91,11 @@ class Calendar
      */
     public function setTimezone($timezone)
     {
-        if (! ($timezone instanceof \DateTimeZone || is_string($timezone))) {
+        if (! ($timezone instanceof DateTimeZone || is_string($timezone))) {
             throw new \InvalidArgumentException('setTimezone requires a DateTimeZone instance or a timezone string');
         }
 
-        if ($timezone instanceof \DateTimeZone) {
-            $this->timezone = $timezone;
-        } else {
-            $this->timezone = new \DateTimeZone($timezone);
-        }
+        $this->timezone = $timezone instanceof DateTimeZone ? $timezone : new DateTimeZone($timezone);
     }
 
     /**

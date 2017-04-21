@@ -123,7 +123,7 @@ class Calendar
     }
 
     /**
-     * @param Day $firstDay
+     * @param \Carvefx\Calendar\Day $firstDay
      *
      * @return int
      */
@@ -135,7 +135,7 @@ class Calendar
     }
 
     /**
-     * @return Day
+     * @return \Carvefx\Calendar\Day
      */
     public function getFirstDay()
     {
@@ -153,7 +153,7 @@ class Calendar
     }
 
     /**
-     * @return Week[]
+     * @return \Carvefx\Calendar\Week[]
      */
     public function getWeeks()
     {

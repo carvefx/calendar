@@ -7,7 +7,7 @@ use Carbon\Carbon;
 class Week
 {
     /**
-     * @var Day
+     * @var \Carvefx\Calendar\Day
      */
     private $dateStart;
 
@@ -22,7 +22,7 @@ class Week
     private $currentMonth;
 
     /**
-     * @param Day $dateStart
+     * @param \Carvefx\Calendar\Day $dateStart
      * @param mixed $currentMonth
      */
     public function __construct(Day $dateStart, $currentMonth = null)
@@ -34,7 +34,7 @@ class Week
     }
 
     /**
-     * @param Day $dateStart
+     * @param \Carvefx\Calendar\Day $dateStart
      */
     private function setStartDate(Day $dateStart)
     {
@@ -45,7 +45,7 @@ class Week
     }
 
     /**
-     * @return Day
+     * @return \Carvefx\Calendar\Day
      */
     public function getStartDate()
     {
@@ -84,7 +84,7 @@ class Week
      * Adds a day to the days property
      * Goes through a check first
      *
-     * @param Day $day
+     * @param \Carvefx\Calendar\Day $day
      */
     private function addDay(Day $day)
     {
@@ -94,7 +94,7 @@ class Week
     }
 
     /**
-     * @return Day[]
+     * @return \Carvefx\Calendar\Day[]
      */
     public function getDays()
     {
@@ -105,7 +105,7 @@ class Week
      * Determines whether a day is part of the currently
      * selected month or not
      *
-     * @param Day $day
+     * @param \Carvefx\Calendar\Day $day
      *
      * @return bool
      */

@@ -160,15 +160,15 @@ class Calendar
      */
     public function getWeeks()
     {
-        $first_day = $this->getFirstDay();
-        $last_day = $this->getLastDay();
-        $number_of_weeks = $this->isVariableWeeks() ? $this->getWeekCount($first_day) : self::WEEKS_IN_MONTH;
+        $firstDay = $this->getFirstDay();
+        $lastDay = $this->getLastDay();
+        $numberOfWeeks = $this->isVariableWeeks() ? $this->getWeekCount($firstDay) : self::WEEKS_IN_MONTH;
 
         $weeks = [];
-        for ($week = 1; $week <= $number_of_weeks; $week++) {
-            $curr_week = new Week(clone $first_day, $last_day->month);
-            $weeks[] = $curr_week;
-            $first_day->addDays(7);
+        for ($week = 1; $week <= $numberOfWeeks; $week++) {
+            $currWeek = new Week(clone $firstDay, $lastDay->month);
+            $weeks[] = $currWeek;
+            $firstDay->addDays(7);
         }
 
         return $weeks;

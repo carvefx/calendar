@@ -9,7 +9,7 @@ class Day extends AbstractCarbonWrapper
     /**
      * @var bool
      */
-    private $blank_day = false;
+    private $blankDay = false;
 
     /**
      * @param int $year
@@ -35,7 +35,7 @@ class Day extends AbstractCarbonWrapper
             throw new \InvalidArgumentException('setBlankDay requires a boolean value');
         }
 
-        $this->blank_day = $value;
+        $this->blankDay = $value;
     }
 
     /**
@@ -47,6 +47,6 @@ class Day extends AbstractCarbonWrapper
      */
     public function isBlankDay()
     {
-        return $this->blank_day;
+        return $this->blankDay;
     }
 }

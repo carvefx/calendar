@@ -9,7 +9,7 @@ class Week
     /**
      * @var Day
      */
-    private $date_start;
+    private $dateStart;
 
     /**
      * @var array
@@ -19,29 +19,29 @@ class Week
     /**
      * @var int
      */
-    private $current_month;
+    private $currentMonth;
 
     /**
-     * @param Day $date_start
-     * @param mixed $current_month
+     * @param Day $dateStart
+     * @param mixed $currentMonth
      */
-    public function __construct(Day $date_start, $current_month = null)
+    public function __construct(Day $dateStart, $currentMonth = null)
     {
-        $this->setStartDate($date_start);
-        $this->setCurrentMonth($current_month);
-        $this->addDay($this->date_start);
+        $this->setStartDate($dateStart);
+        $this->setCurrentMonth($currentMonth);
+        $this->addDay($this->dateStart);
         $this->generateWeek();
     }
 
     /**
-     * @param Day $date_start
+     * @param Day $dateStart
      */
-    private function setStartDate(Day $date_start)
+    private function setStartDate(Day $dateStart)
     {
-        /** @var Carbon $week_start */
-        $week_start = $date_start->startOfWeek();
+        /** @var Carbon $startOfWeek */
+        $startOfWeek = $dateStart->startOfWeek();
 
-        $this->date_start = new Day($week_start->year, $week_start->month, $week_start->day, $week_start->timezone);
+        $this->dateStart = new Day($startOfWeek->year, $startOfWeek->month, $startOfWeek->day, $startOfWeek->timezone);
     }
 
     /**
@@ -49,18 +49,18 @@ class Week
      */
     public function getStartDate()
     {
-        return $this->date_start;
+        return $this->dateStart;
     }
 
     /**
-     * @param $current_month
+     * @param $currentMonth
      */
-    private function setCurrentMonth($current_month)
+    private function setCurrentMonth($currentMonth)
     {
-        if ($current_month === null) {
-            $this->current_month = $this->date_start->month;
+        if ($currentMonth === null) {
+            $this->currentMonth = $this->dateStart->month;
         } else {
-            $this->current_month = $current_month;
+            $this->currentMonth = $currentMonth;
         }
     }
 
@@ -69,7 +69,7 @@ class Week
      */
     public function getCurrentMonth()
     {
-        return $this->current_month;
+        return $this->currentMonth;
     }
 
     /**
@@ -77,10 +77,10 @@ class Week
      */
     private function generateWeek()
     {
-        $date = clone $this->date_start;
+        $date = clone $this->dateStart;
         for ($day = 1; $day < Carbon::DAYS_PER_WEEK; $day++) {
-            $curr_day = clone $date->addDays(1);
-            $this->addDay($curr_day);
+            $currDay = clone $date->addDays(1);
+            $this->addDay($currDay);
         }
     }
 

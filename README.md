@@ -47,7 +47,7 @@ foreach($calendar->getWeeks() as $week) {
 
 ## Documentation
 
-_Calendar_ comes with 3 main classes: 
+_Calendar_ comes with 3 main classes:
 
 * `\Carvefx\Calendar\Calendar`: represents a display of the current month, *including* the blank days that belong to the previous or next months
 * `\Carvefx\Calendar\Week`: represents 7 days, regardless of the month it belongs to
@@ -88,6 +88,9 @@ $calendar->getFirstDay(); // returns the first day of the month
 $calendar->getLastDay(); // returns the last day of the month
 $calendar->getWeeks() // returns an array of Week objects
 ```
+
+#### :warning: Note! :warning:
+Setting the timezone *may* have unintended consequences. Daylight Savings Time may cause duplicate days. To try and work around this, the `hour` component of the day has been set to `5` since it seems to be after most countries have finished changing. If this causes problems, please open an [issue](https://github.com/kmdwebdesigns/calendar/issues).
 
 ### `Week` API
 

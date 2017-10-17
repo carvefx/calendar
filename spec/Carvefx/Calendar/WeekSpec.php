@@ -116,4 +116,136 @@ class WeekSpec extends ObjectBehavior
         $days = $this->getDays();
         $days[0]->dayOfWeek->shouldBe(Carbon::SUNDAY);
     }
+
+    function it_handles_us_daylight_savings_time_start()
+    {
+        Carbon::setWeekStartsAt(Carbon::SUNDAY);
+        Carbon::setWeekEndsAt(Carbon::SATURDAY);
+
+        $start = new Day(2017, 3, 12, 'America/New_York');
+        $currentMonth = 11;
+        $this->beConstructedWith($start, $currentMonth);
+
+        $days = $this->getDays();
+        $days->shouldBeArray();
+        $days->shouldHaveCount(7);
+
+        $days[0]->toDateString()->shouldBe('2017-03-12');
+        $days[1]->toDateString()->shouldBe('2017-03-13');
+        $days[2]->toDateString()->shouldBe('2017-03-14');
+        $days[3]->toDateString()->shouldBe('2017-03-15');
+        $days[4]->toDateString()->shouldBe('2017-03-16');
+        $days[5]->toDateString()->shouldBe('2017-03-17');
+        $days[6]->toDateString()->shouldBe('2017-03-18');
+    }
+
+    function it_handles_us_daylight_savings_time_end()
+    {
+        Carbon::setWeekStartsAt(Carbon::SUNDAY);
+        Carbon::setWeekEndsAt(Carbon::SATURDAY);
+
+        $start = new Day(2017, 11, 5, 'America/New_York');
+        $currentMonth = 11;
+        $this->beConstructedWith($start, $currentMonth);
+
+        $days = $this->getDays();
+        $days->shouldBeArray();
+        $days->shouldHaveCount(7);
+
+        $days[0]->toDateString()->shouldBe('2017-11-05');
+        $days[1]->toDateString()->shouldBe('2017-11-06');
+        $days[2]->toDateString()->shouldBe('2017-11-07');
+        $days[3]->toDateString()->shouldBe('2017-11-08');
+        $days[4]->toDateString()->shouldBe('2017-11-09');
+        $days[5]->toDateString()->shouldBe('2017-11-10');
+        $days[6]->toDateString()->shouldBe('2017-11-11');
+    }
+
+    function it_handles_uk_daylight_savings_time_start()
+    {
+        Carbon::setWeekStartsAt(Carbon::MONDAY);
+        Carbon::setWeekEndsAt(Carbon::SUNDAY);
+
+        $start = new Day(2017, 3, 26, 'Europe/London');
+        $currentMonth = 9;
+        $this->beConstructedWith($start, $currentMonth);
+
+        $days = $this->getDays();
+        $days->shouldBeArray();
+        $days->shouldHaveCount(7);
+
+        $days[0]->toDateString()->shouldBe('2017-03-20');
+        $days[1]->toDateString()->shouldBe('2017-03-21');
+        $days[2]->toDateString()->shouldBe('2017-03-22');
+        $days[3]->toDateString()->shouldBe('2017-03-23');
+        $days[4]->toDateString()->shouldBe('2017-03-24');
+        $days[5]->toDateString()->shouldBe('2017-03-25');
+        $days[6]->toDateString()->shouldBe('2017-03-26');
+    }
+
+    function it_handles_uk_daylight_savings_time_end()
+    {
+        Carbon::setWeekStartsAt(Carbon::MONDAY);
+        Carbon::setWeekEndsAt(Carbon::SUNDAY);
+
+        $start = new Day(2017, 10, 29, 'Europe/London');
+        $currentMonth = 4;
+        $this->beConstructedWith($start, $currentMonth);
+
+        $days = $this->getDays();
+        $days->shouldBeArray();
+        $days->shouldHaveCount(7);
+
+        $days[0]->toDateString()->shouldBe('2017-10-23');
+        $days[1]->toDateString()->shouldBe('2017-10-24');
+        $days[2]->toDateString()->shouldBe('2017-10-25');
+        $days[3]->toDateString()->shouldBe('2017-10-26');
+        $days[4]->toDateString()->shouldBe('2017-10-27');
+        $days[5]->toDateString()->shouldBe('2017-10-28');
+        $days[6]->toDateString()->shouldBe('2017-10-29');
+    }
+
+    function it_handles_nz_daylight_savings_time_start()
+    {
+        Carbon::setWeekStartsAt(Carbon::SUNDAY);
+        Carbon::setWeekEndsAt(Carbon::SATURDAY);
+
+        $start = new Day(2017, 9, 24, 'Pacific/Auckland');
+        $currentMonth = 9;
+        $this->beConstructedWith($start, $currentMonth);
+
+        $days = $this->getDays();
+        $days->shouldBeArray();
+        $days->shouldHaveCount(7);
+
+        $days[0]->toDateString()->shouldBe('2017-09-24');
+        $days[1]->toDateString()->shouldBe('2017-09-25');
+        $days[2]->toDateString()->shouldBe('2017-09-26');
+        $days[3]->toDateString()->shouldBe('2017-09-27');
+        $days[4]->toDateString()->shouldBe('2017-09-28');
+        $days[5]->toDateString()->shouldBe('2017-09-29');
+        $days[6]->toDateString()->shouldBe('2017-09-30');
+    }
+
+    function it_handles_nz_daylight_savings_time_end()
+    {
+        Carbon::setWeekStartsAt(Carbon::SUNDAY);
+        Carbon::setWeekEndsAt(Carbon::SATURDAY);
+
+        $start = new Day(2018, 4, 2, 'Pacific/Auckland');
+        $currentMonth = 4;
+        $this->beConstructedWith($start, $currentMonth);
+
+        $days = $this->getDays();
+        $days->shouldBeArray();
+        $days->shouldHaveCount(7);
+
+        $days[0]->toDateString()->shouldBe('2018-04-01');
+        $days[1]->toDateString()->shouldBe('2018-04-02');
+        $days[2]->toDateString()->shouldBe('2018-04-03');
+        $days[3]->toDateString()->shouldBe('2018-04-04');
+        $days[4]->toDateString()->shouldBe('2018-04-05');
+        $days[5]->toDateString()->shouldBe('2018-04-06');
+        $days[6]->toDateString()->shouldBe('2018-04-07');
+    }
 }

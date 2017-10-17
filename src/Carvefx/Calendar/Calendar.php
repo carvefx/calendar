@@ -149,7 +149,10 @@ class Calendar
     {
         $start = $this->getFirstDay();
 
-        return $start->endOfMonth()->startOfDay();
+        /** @var \Carbon\Carbon $endOfMonth */
+        $endOfMonth = $start->endOfMonth()->startOfDay();
+
+        return $this->getTimezone()->getName() === 'UTC' ? $endOfMonth : $endOfMonth->hour(5);
     }
 
     /**

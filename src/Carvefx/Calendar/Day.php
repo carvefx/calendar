@@ -19,9 +19,13 @@ class Day extends AbstractCarbonWrapper
      */
     public function __construct($year, $month, $day, $timezone = 'UTC')
     {
-        $this->carbon = Carbon::create($year, $month, $day, 0, 0, 0, $timezone);
+        $hour = 5;
 
-        return $this;
+        if (($timezone instanceof \DateTimeZone && $timezone->getName() === 'UTC') || $timezone === 'UTC') {
+            $hour = 0;
+        }
+
+        $this->carbon = Carbon::create($year, $month, $day, $hour, 0, 0, $timezone);
     }
 
     /**

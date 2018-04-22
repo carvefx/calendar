@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Carvefx\Calendar;
 
 abstract class AbstractCarbonWrapper

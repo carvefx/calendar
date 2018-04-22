@@ -33,53 +33,29 @@ class Calendar
      */
     private $variableWeeks = false;
 
-    public function __construct($year, $month, $timezone = 'UTC')
+    public function __construct(int $year, int $month, $timezone = 'UTC')
     {
         $this->setYear($year);
         $this->setMonth($month);
         $this->setTimezone($timezone);
     }
 
-    /**
-     * @param int $month
-     *
-     * @throws \InvalidArgumentException
-     */
-    public function setMonth($month)
+    public function setMonth(int $month): void
     {
-        if (! is_int($month)) {
-            throw new \InvalidArgumentException('setMonth requires an integer value');
-        }
-
         $this->month = $month;
     }
 
-    /**
-     * @return int
-     */
-    public function getMonth()
+    public function getMonth(): int
     {
         return $this->month;
     }
 
-    /**
-     * @param int $year
-     *
-     * @throws \InvalidArgumentException
-     */
-    public function setYear($year)
+    public function setYear(int $year): void
     {
-        if (! is_int($year)) {
-            throw new \InvalidArgumentException('setYear requires an integer value');
-        }
-
         $this->year = $year;
     }
 
-    /**
-     * @return int
-     */
-    public function getYear()
+    public function getYear(): int
     {
         return $this->year;
     }
@@ -89,7 +65,7 @@ class Calendar
      *
      * @throws \InvalidArgumentException
      */
-    public function setTimezone($timezone)
+    public function setTimezone($timezone): void
     {
         if (! ($timezone instanceof DateTimeZone || is_string($timezone))) {
             throw new \InvalidArgumentException('setTimezone requires a DateTimeZone instance or a timezone string');
@@ -98,58 +74,37 @@ class Calendar
         $this->timezone = $timezone instanceof DateTimeZone ? $timezone : new DateTimeZone($timezone);
     }
 
-    /**
-     * @return \DateTimeZone
-     */
-    public function getTimezone()
+    public function getTimezone(): DateTimeZone
     {
         return $this->timezone;
     }
 
-    /**
-     * @param bool $variableWeeks
-     */
-    public function setVariableWeeks($variableWeeks)
+    public function setVariableWeeks(bool $variableWeeks)
     {
         $this->variableWeeks = $variableWeeks;
     }
 
-    /**
-     * @return bool
-     */
-    public function isVariableWeeks()
+    public function isVariableWeeks(): bool
     {
         return $this->variableWeeks;
     }
 
-    /**
-     * @param \Carvefx\Calendar\Day $firstDay
-     *
-     * @return int
-     */
-    protected function getWeekCount(Day $firstDay)
+    protected function getWeekCount(Day $firstDay): int
     {
         $startOfWeek = Carbon::getWeekStartsAt();
 
         return ceil(((($firstDay->dayOfWeek - $startOfWeek + 7) % 7) + $firstDay->daysInMonth) / 7);
     }
 
-    /**
-     * @return \Carvefx\Calendar\Day
-     */
-    public function getFirstDay()
+    public function getFirstDay(): Day
     {
         return new Day($this->year, $this->month, 1, $this->timezone);
     }
 
-    /**
-     * @return \Carbon\Carbon
-     */
-    public function getLastDay()
+    public function getLastDay(): Carbon
     {
         $start = $this->getFirstDay();
 
-        /** @var \Carbon\Carbon $endOfMonth */
         $endOfMonth = $start->endOfMonth()->startOfDay();
 
         return $this->getTimezone()->getName() === 'UTC' ? $endOfMonth : $endOfMonth->hour(5);
@@ -158,7 +113,7 @@ class Calendar
     /**
      * @return \Carvefx\Calendar\Week[]
      */
-    public function getWeeks()
+    public function getWeeks(): array
     {
         $firstDay = $this->getFirstDay();
         $lastDay = $this->getLastDay();

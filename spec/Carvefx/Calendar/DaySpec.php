@@ -47,13 +47,6 @@ class DaySpec extends ObjectBehavior
         $this->isBlankDay()->shouldReturn(true);
     }
 
-    public function it_throws_an_exception_when_attempting_to_set_blank_day_status_as_non_boolean()
-    {
-        $this->shouldThrow('\InvalidArgumentException')->duringSetBlankDay('party like it\'s 1999');
-        $this->shouldThrow('\InvalidArgumentException')->duringSetBlankDay(1999);
-        $this->shouldThrow('\InvalidArgumentException')->duringSetBlankDay('1');
-    }
-
     public function it_returns_true_if_today()
     {
         $today = Carbon::now();

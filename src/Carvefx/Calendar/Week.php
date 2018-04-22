@@ -21,11 +21,7 @@ class Week
      */
     private $currentMonth;
 
-    /**
-     * @param \Carvefx\Calendar\Day $dateStart
-     * @param mixed $currentMonth
-     */
-    public function __construct(Day $dateStart, $currentMonth = null)
+    public function __construct(Day $dateStart, int $currentMonth = null)
     {
         $this->setStartDate($dateStart);
         $this->setCurrentMonth($currentMonth);
@@ -33,37 +29,24 @@ class Week
         $this->generateWeek();
     }
 
-    /**
-     * @param \Carvefx\Calendar\Day $dateStart
-     */
-    private function setStartDate(Day $dateStart)
+    private function setStartDate(Day $dateStart): void
     {
-        /** @var Carbon $startOfWeek */
         $startOfWeek = $dateStart->startOfWeek();
 
         $this->dateStart = new Day($startOfWeek->year, $startOfWeek->month, $startOfWeek->day, $startOfWeek->timezone);
     }
 
-    /**
-     * @return \Carvefx\Calendar\Day
-     */
-    public function getStartDate()
+    public function getStartDate(): Day
     {
         return $this->dateStart;
     }
 
-    /**
-     * @param $currentMonth
-     */
-    private function setCurrentMonth($currentMonth)
+    private function setCurrentMonth(int $currentMonth = null): void
     {
         $this->currentMonth = $currentMonth === null ? $this->dateStart->month : $currentMonth;
     }
 
-    /**
-     * @return null|int
-     */
-    public function getCurrentMonth()
+    public function getCurrentMonth(): ?int
     {
         return $this->currentMonth;
     }
@@ -71,7 +54,7 @@ class Week
     /**
      * Generates a week from the specified start date
      */
-    private function generateWeek()
+    private function generateWeek(): void
     {
         $date = clone $this->dateStart;
         for ($day = 1; $day < Carbon::DAYS_PER_WEEK; $day++) {
@@ -83,10 +66,8 @@ class Week
     /**
      * Adds a day to the days property
      * Goes through a check first
-     *
-     * @param \Carvefx\Calendar\Day $day
      */
-    private function addDay(Day $day)
+    private function addDay(Day $day): void
     {
         $day->setBlankDay(! $this->currentMonthDay($day));
 
@@ -96,7 +77,7 @@ class Week
     /**
      * @return \Carvefx\Calendar\Day[]
      */
-    public function getDays()
+    public function getDays(): array
     {
         return $this->days;
     }
@@ -104,12 +85,8 @@ class Week
     /**
      * Determines whether a day is part of the currently
      * selected month or not
-     *
-     * @param \Carvefx\Calendar\Day $day
-     *
-     * @return bool
      */
-    public function currentMonthDay(Day $day)
+    public function currentMonthDay(Day $day): bool
     {
         return $day->month === $this->getCurrentMonth();
     }

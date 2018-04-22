@@ -4,6 +4,9 @@ namespace Carvefx\Calendar;
 
 use Carbon\Carbon;
 
+/**
+ * @mixin \Carbon\Carbon
+ */
 class Day extends AbstractCarbonWrapper
 {
     /**
@@ -12,12 +15,9 @@ class Day extends AbstractCarbonWrapper
     private $blankDay = false;
 
     /**
-     * @param int $year
-     * @param int $month
-     * @param int $day
      * @param \DateTimeZone|string $timezone
      */
-    public function __construct($year, $month, $day, $timezone = 'UTC')
+    public function __construct(int $year, int $month, int $day, $timezone = 'UTC')
     {
         $hour = 5;
 
@@ -28,17 +28,8 @@ class Day extends AbstractCarbonWrapper
         $this->carbon = Carbon::create($year, $month, $day, $hour, 0, 0, $timezone);
     }
 
-    /**
-     * @param bool $value
-     *
-     * @throws \InvalidArgumentException
-     */
-    public function setBlankDay($value)
+    public function setBlankDay(bool $value): void
     {
-        if (! is_bool($value)) {
-            throw new \InvalidArgumentException('setBlankDay requires a boolean value');
-        }
-
         $this->blankDay = $value;
     }
 
@@ -46,10 +37,8 @@ class Day extends AbstractCarbonWrapper
      * A "blank" day refers to days that appear
      * on the current months calendar but are physically part of the
      * previous or next months
-     *
-     * @return bool
      */
-    public function isBlankDay()
+    public function isBlankDay(): bool
     {
         return $this->blankDay;
     }

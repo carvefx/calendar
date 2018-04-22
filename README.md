@@ -2,10 +2,13 @@
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/004f9246-a92c-479a-a0e0-4564fe43eaa5/mini.png)](https://insight.sensiolabs.com/projects/004f9246-a92c-479a-a0e0-4564fe43eaa5)
 [![Build Status](https://travis-ci.org/kmdwebdesigns/calendar.svg?branch=master)](https://travis-ci.org/kmdwebdesigns/calendar)
 
-calendar
-========
+# calendar
 
 Calendar Library written in PHP
+
+## Requirements
+
+Calendar requires PHP 7.1+. If you cannot upgrade to a more modern version of PHP, [Calendar v1](tree/v1.2.0) only requires PHP 5.6.
 
 ## Installation
 
@@ -23,10 +26,10 @@ Add the following above the `require` block in your `composer.json`:
 Then run the following in your terminal:
 
 ```bash
-$ composer require "carvefx/calendar:^1.1"
+composer require "carvefx/calendar:^2.0"
 ```
 
-Or, add `"carvefx/calendar": "^1.1"` to your `composer.json` and then run `composer update` in your terminal.
+Or, add `"carvefx/calendar": "^2.0"` to your `composer.json` and then run `composer update` in your terminal.
 
 ## Usage
 

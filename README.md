@@ -8,7 +8,7 @@ Calendar Library written in PHP
 
 ## Requirements
 
-Calendar requires PHP 7.1+. If you cannot upgrade to a more modern version of PHP, [Calendar v1](tree/v1.2.0) only requires PHP 5.6.
+Calendar requires PHP 7.1+. If you cannot upgrade to a more modern version of PHP, [Calendar v1](tree/v1) only requires PHP 5.6.
 
 ## Installation
 

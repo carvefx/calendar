@@ -1,12 +1,10 @@
 <?php
 
-namespace Carvefx\Calendar;
+namespace Calendar;
 
 use Carbon\Carbon;
+use DateTimeZone;
 
-/**
- * @mixin \Carbon\Carbon
- */
 class Day extends AbstractCarbonWrapper
 {
     /**
@@ -15,13 +13,16 @@ class Day extends AbstractCarbonWrapper
     private $blankDay = false;
 
     /**
-     * @param \DateTimeZone|string $timezone
+     * @param  int $year
+     * @param  int $month
+     * @param  int $day
+     * @param  \DateTimeZone|string $timezone
      */
     public function __construct(int $year, int $month, int $day, $timezone = 'UTC')
     {
         $hour = 5;
 
-        if (($timezone instanceof \DateTimeZone && $timezone->getName() === 'UTC') || $timezone === 'UTC') {
+        if (($timezone instanceof DateTimeZone && $timezone->getName() === 'UTC') || $timezone === 'UTC') {
             $hour = 0;
         }
 

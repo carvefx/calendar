@@ -1,28 +1,34 @@
 <?php
 
-namespace Carvefx\Calendar;
+namespace Calendar;
 
-use Carbon\Carbon;
+use Carbon\CarbonInterface;
 
 class Week
 {
     /**
-     * @var \Carvefx\Calendar\Day
+     * @var \Calendar\Day
      */
     private $dateStart;
-
-    /**
-     * @var array
-     */
-    private $days = [];
 
     /**
      * @var int
      */
     private $currentMonth;
 
-    public function __construct(Day $dateStart, int $currentMonth = null)
+    /**
+     * @var int
+     */
+    private $weekStart = CarbonInterface::MONDAY;
+
+    /**
+     * @var array
+     */
+    private $days = [];
+
+    public function __construct(Day $dateStart, int $currentMonth = null, int $weekStart = CarbonInterface::MONDAY)
     {
+        $this->setWeekStart($weekStart);
         $this->setStartDate($dateStart);
         $this->setCurrentMonth($currentMonth);
         $this->addDay($this->dateStart);
@@ -31,7 +37,7 @@ class Week
 
     private function setStartDate(Day $dateStart): void
     {
-        $startOfWeek = $dateStart->startOfWeek();
+        $startOfWeek = $dateStart->startOfWeek($this->getWeekStart());
 
         $this->dateStart = new Day($startOfWeek->year, $startOfWeek->month, $startOfWeek->day, $startOfWeek->timezone);
     }
@@ -51,14 +57,24 @@ class Week
         return $this->currentMonth;
     }
 
+    public function setWeekStart(int $weekStart)
+    {
+        $this->weekStart = $weekStart;
+    }
+
+    public function getWeekStart(): int
+    {
+        return $this->weekStart;
+    }
+
     /**
      * Generates a week from the specified start date
      */
     private function generateWeek(): void
     {
         $date = clone $this->dateStart;
-        for ($day = 1; $day < Carbon::DAYS_PER_WEEK; $day++) {
-            $currDay = clone $date->addDays(1);
+        for ($day = 1; $day < CarbonInterface::DAYS_PER_WEEK; $day++) {
+            $currDay = clone $date->addDay();
             $this->addDay($currDay);
         }
     }
@@ -75,7 +91,7 @@ class Week
     }
 
     /**
-     * @return \Carvefx\Calendar\Day[]
+     * @return \Calendar\Day[]
      */
     public function getDays(): array
     {

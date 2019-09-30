@@ -1,9 +1,10 @@
 <?php
 
-namespace Carvefx\Calendar;
+namespace Calendar;
 
-use Carbon\Carbon;
+use Carbon\CarbonInterface;
 use DateTimeZone;
+use InvalidArgumentException;
 
 class Calendar
 {
@@ -27,6 +28,11 @@ class Calendar
      * @var \DateTimeZone
      */
     private $timezone;
+
+    /**
+     * @var int
+     */
+    private $weekStart = CarbonInterface::MONDAY;
 
     /**
      * @var bool
@@ -61,14 +67,14 @@ class Calendar
     }
 
     /**
-     * @param \DateTimeZone|string $timezone
+     * @param  \DateTimeZone|string $timezone
      *
      * @throws \InvalidArgumentException
      */
     public function setTimezone($timezone): void
     {
         if (! ($timezone instanceof DateTimeZone || is_string($timezone))) {
-            throw new \InvalidArgumentException('setTimezone requires a DateTimeZone instance or a timezone string');
+            throw new InvalidArgumentException('setTimezone requires a DateTimeZone instance or a timezone string');
         }
 
         $this->timezone = $timezone instanceof DateTimeZone ? $timezone : new DateTimeZone($timezone);
@@ -77,6 +83,16 @@ class Calendar
     public function getTimezone(): DateTimeZone
     {
         return $this->timezone;
+    }
+
+    public function setWeekStart(int $weekStart)
+    {
+        $this->weekStart = $weekStart;
+    }
+
+    public function getWeekStart(): int
+    {
+        return $this->weekStart;
     }
 
     public function setVariableWeeks(bool $variableWeeks)
@@ -91,7 +107,7 @@ class Calendar
 
     protected function getWeekCount(Day $firstDay): int
     {
-        $startOfWeek = Carbon::getWeekStartsAt();
+        $startOfWeek = $this->getWeekStart();
 
         return ceil(((($firstDay->dayOfWeek - $startOfWeek + 7) % 7) + $firstDay->daysInMonth) / 7);
     }
@@ -101,7 +117,7 @@ class Calendar
         return new Day($this->year, $this->month, 1, $this->timezone);
     }
 
-    public function getLastDay(): Carbon
+    public function getLastDay(): CarbonInterface
     {
         $start = $this->getFirstDay();
 
@@ -111,7 +127,7 @@ class Calendar
     }
 
     /**
-     * @return \Carvefx\Calendar\Week[]
+     * @return \Calendar\Week[]
      */
     public function getWeeks(): array
     {
@@ -121,7 +137,7 @@ class Calendar
 
         $weeks = [];
         for ($week = 1; $week <= $numberOfWeeks; $week++) {
-            $currWeek = new Week(clone $firstDay, $lastDay->month);
+            $currWeek = new Week(clone $firstDay, $lastDay->month, $this->getWeekStart());
             $weeks[] = $currWeek;
             $firstDay->addDays(7);
         }

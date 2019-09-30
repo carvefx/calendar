@@ -1,11 +1,14 @@
 <?php
 
-namespace Carvefx\Calendar;
+namespace Calendar;
 
+/**
+ * @mixin \Carbon\CarbonImmutable
+ */
 abstract class AbstractCarbonWrapper
 {
     /**
-     * @var \Carbon\Carbon
+     * @var \Carbon\CarbonImmutable
      */
     protected $carbon;
 
@@ -40,12 +43,7 @@ abstract class AbstractCarbonWrapper
         return $this;
     }
 
-    /**
-     * @param $method
-     *
-     * @return bool
-     */
-    protected function isModifierMethod($method)
+    protected function isModifierMethod(string $method): bool
     {
         $pattern = '/^add|^sub/';
         preg_match($pattern, $method, $matches);
@@ -62,6 +60,6 @@ abstract class AbstractCarbonWrapper
      */
     public function __clone()
     {
-        $this->carbon = clone $this->carbon;
+        $this->carbon = $this->carbon->copy();
     }
 }

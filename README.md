@@ -2,13 +2,13 @@
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/004f9246-a92c-479a-a0e0-4564fe43eaa5/mini.png)](https://insight.sensiolabs.com/projects/004f9246-a92c-479a-a0e0-4564fe43eaa5)
 [![Build Status](https://travis-ci.org/kmdwebdesigns/calendar.svg?branch=master)](https://travis-ci.org/kmdwebdesigns/calendar)
 
-# calendar
+# Calendar
 
 Calendar Library written in PHP
 
 ## Requirements
 
-Calendar requires PHP 7.1+. If you cannot upgrade to a more modern version of PHP, [Calendar v1](tree/v1) only requires PHP 5.6.
+Calendar requires PHP 7.2+. If you cannot upgrade to a more modern version of PHP, [Calendar v1](tree/v1) only requires PHP 5.6.
 
 ## Installation
 
@@ -26,17 +26,17 @@ Add the following above the `require` block in your `composer.json`:
 Then run the following in your terminal:
 
 ```bash
-composer require "carvefx/calendar:^2.0"
+composer require "carvefx/calendar:^3.0"
 ```
 
-Or, add `"carvefx/calendar": "^2.0"` to your `composer.json` and then run `composer update` in your terminal.
+Or, add `"carvefx/calendar": "^3.0"` to your `composer.json` and then run `composer update` in your terminal.
 
 ## Usage
 
 ```php
 require('vendor/autoload.php');
 
-use Carvefx\Calendar\Calendar;
+use Calendar\Calendar;
 
 $calendar = new Calendar(2014, 8);
 
@@ -52,17 +52,15 @@ foreach($calendar->getWeeks() as $week) {
 
 _Calendar_ comes with 3 main classes:
 
-* `\Carvefx\Calendar\Calendar`: represents a display of the current month, *including* the blank days that belong to the previous or next months
-* `\Carvefx\Calendar\Week`: represents 7 days, regardless of the month it belongs to
-* `\Carvefx\Calendar\Day`: represents a single day and wraps around the \Carbon\Carbon class
+* `\Calendar\Calendar`: represents a display of the current month, *including* the blank days that belong to the previous or next months
+* `\Calendar\Week`: represents 7 days, regardless of the month it belongs to
+* `\Calendar\Day`: represents a single day and wraps around the \Carbon\Carbon class
 
-By default, the calendar will start on Monday. You can set which day of the week your calendar starts on by using Carbon's `setWeekStartsAt` and `setWeekEndsAt` methods:
+By default, the calendar will start on Monday. You can set which day of the week your calendar starts on by using the `setWeekStart` method:
 
 ```php
-\Carbon\Carbon::setWeekStartsAt(Carbon::SUNDAY);
-\Carbon\Carbon::setWeekEndsAt(Carbon::SATURDAY);
-
-$calendar = new Calendar(2014, 8); // First day of the week is now Sunday
+$calendar = new Calendar(2014, 8);
+$calendar->setWeekStart(CarbonInterface:SUNDAY); // First day of the week is now Sunday
 ```
 
 Also by default, the calendar will display 6 weeks no matter how many weeks the actual month needs. This can be configured with the `setVariableWeeks` method:

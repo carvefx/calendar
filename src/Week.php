@@ -57,7 +57,7 @@ class Week
         return $this->currentMonth;
     }
 
-    public function setWeekStart(int $weekStart)
+    public function setWeekStart(int $weekStart): void
     {
         $this->weekStart = $weekStart;
     }

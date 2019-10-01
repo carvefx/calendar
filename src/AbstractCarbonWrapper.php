@@ -3,12 +3,12 @@
 namespace Calendar;
 
 /**
- * @mixin \Carbon\CarbonImmutable
+ * @mixin \Carbon\Carbon
  */
 abstract class AbstractCarbonWrapper
 {
     /**
-     * @var \Carbon\CarbonImmutable
+     * @var \Carbon\Carbon
      */
     protected $carbon;
 

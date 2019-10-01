@@ -83,6 +83,8 @@ $calendar->setYear(2015);
 $calendar->setMonth(7);
 $calendar->setTimezone($timezone); // where $timezone is either a bare timezone string, or a DateTimeZone object
 $calendar->getTimezone(); // returns the currently set timezone of the calendar as a DateTimeZone object
+$calendar->setWeekStart(CarbonInterface::SUNDAY); // or you may use the zero-indexed day integer
+$calendar->getWeekStart(); // returns the current start of the week zero-indexed day integer
 $calendar->getFirstDay(); // returns the first day of the month
 $calendar->getLastDay(); // returns the last day of the month
 $calendar->getWeeks() // returns an array of Week objects

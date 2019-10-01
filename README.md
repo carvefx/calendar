@@ -8,7 +8,7 @@ Calendar Library written in PHP
 
 ## Requirements
 
-Calendar requires PHP 7.2+. If you cannot upgrade to a more modern version of PHP, [Calendar v1](tree/v1) only requires PHP 5.6.
+Calendar requires PHP 7.2+ and [Carbon v2](https://github.com/briannesbitt/carbon).
 
 ## Installation
 
@@ -34,8 +34,6 @@ Or, add `"carvefx/calendar": "^3.0"` to your `composer.json` and then run `compo
 ## Usage
 
 ```php
-require('vendor/autoload.php');
-
 use Calendar\Calendar;
 
 $calendar = new Calendar(2014, 8);
@@ -97,7 +95,7 @@ Setting the timezone *may* have unintended consequences. Daylight Savings Time m
 
 ```php
 $first_day = new Day(2014, 07, 01);
-$week = new Week($first_day); // constructor requires the day the week starts at
+$week = new Week($first_day, int $currentMonth = null, int $weekStart = CarbonInterface::MONDAY); // constructor requires the day the week starts at
 $week->getDays(); // returns an array containing 7 Day objects
 ```
 

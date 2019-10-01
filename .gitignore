@@ -1,6 +1,7 @@
-/vendor
-composer.phar
-composer.lock
+build/
+vendor/
 .DS_Store
 .phpunit.result.cache
+composer.phar
+composer.lock
 Thumbs.db

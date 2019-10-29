@@ -85,7 +85,7 @@ class Calendar
         return $this->timezone;
     }
 
-    public function setWeekStart(int $weekStart)
+    public function setWeekStart(int $weekStart): void
     {
         $this->weekStart = $weekStart;
     }
@@ -95,7 +95,7 @@ class Calendar
         return $this->weekStart;
     }
 
-    public function setVariableWeeks(bool $variableWeeks)
+    public function setVariableWeeks(bool $variableWeeks): void
     {
         $this->variableWeeks = $variableWeeks;
     }
@@ -121,6 +121,7 @@ class Calendar
     {
         $start = $this->getFirstDay();
 
+        /** @var \Carbon\CarbonInterface $endOfMonth */
         $endOfMonth = $start->endOfMonth()->startOfDay();
 
         return $this->getTimezone()->getName() === 'UTC' ? $endOfMonth : $endOfMonth->hour(5);
@@ -134,12 +135,14 @@ class Calendar
         $firstDay = $this->getFirstDay();
         $lastDay = $this->getLastDay();
         $numberOfWeeks = $this->isVariableWeeks() ? $this->getWeekCount($firstDay) : self::WEEKS_IN_MONTH;
+        /** @var \Calendar\Day $day */
+        $day = clone $firstDay;
 
         $weeks = [];
         for ($week = 1; $week <= $numberOfWeeks; $week++) {
-            $currWeek = new Week(clone $firstDay, $lastDay->month, $this->getWeekStart());
+            $currWeek = new Week($day, $lastDay->month, $this->getWeekStart());
             $weeks[] = $currWeek;
-            $firstDay->addDays(7);
+            $day = $day->addDays(7);
         }
 
         return $weeks;

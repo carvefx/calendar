@@ -49,7 +49,7 @@ class Week
 
     private function setCurrentMonth(int $currentMonth = null): void
     {
-        $this->currentMonth = $currentMonth === null ? $this->dateStart->month : $currentMonth;
+        $this->currentMonth = $currentMonth ?? $this->dateStart->month;
     }
 
     public function getCurrentMonth(): ?int
@@ -74,14 +74,17 @@ class Week
     {
         $date = clone $this->dateStart;
         for ($day = 1; $day < CarbonInterface::DAYS_PER_WEEK; $day++) {
-            $currDay = clone $date->addDay();
-            $this->addDay($currDay);
+            /** @var \Calendar\Day $date */
+            $date = $date->addDay();
+            $this->addDay(clone $date);
         }
     }
 
     /**
      * Adds a day to the days property
      * Goes through a check first
+     *
+     * @param  \Calendar\Day $day
      */
     private function addDay(Day $day): void
     {
@@ -101,6 +104,10 @@ class Week
     /**
      * Determines whether a day is part of the currently
      * selected month or not
+     *
+     * @param  \Calendar\Day $day
+     *
+     * @return bool
      */
     public function currentMonthDay(Day $day): bool
     {

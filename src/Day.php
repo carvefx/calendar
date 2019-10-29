@@ -2,7 +2,7 @@
 
 namespace Calendar;
 
-use Carbon\Carbon;
+use Carbon\CarbonImmutable as Carbon;
 use DateTimeZone;
 
 class Day extends AbstractCarbonWrapper

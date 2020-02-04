@@ -1,6 +1,5 @@
 [![Code Climate](https://codeclimate.com/github/kmdwebdesigns/calendar.png)](https://codeclimate.com/github/kmdwebdesigns/calendar)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/004f9246-a92c-479a-a0e0-4564fe43eaa5/mini.png)](https://insight.sensiolabs.com/projects/004f9246-a92c-479a-a0e0-4564fe43eaa5)
-[![Build Status](https://travis-ci.org/kmdwebdesigns/calendar.svg?branch=master)](https://travis-ci.org/kmdwebdesigns/calendar)
 
 # Calendar
 

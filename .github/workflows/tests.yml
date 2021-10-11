@@ -18,22 +18,34 @@ jobs:
         os: [ubuntu-latest]
 
     name: PHP ${{ matrix.php }} - ${{ matrix.dependency-version }}
+    env:
+      extensions: mbstring, intl
+      key: v1
 
     steps:
       - name: Checkout the code
-        uses: actions/checkout@v1
-
-      -   name: Cache dependencies
-          uses: actions/cache@v1
-          with:
-              path: ~/.composer/cache/files
-              key: dependencies-php-${{ matrix.php }}-${{ matrix.dependency-version }}-composer-${{ hashFiles('composer.json') }}
-
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v1
+        uses: actions/checkout@v2
+        
+      - name: Setup cache environment
+        id: cache-env
+        uses: shivammathur/cache-extensions@v1
         with:
           php-version: ${{ matrix.php }}
-          extension: mbstring, intl
+          extensions: ${{ env.extensions }}
+          key: ${{ env.key }}
+
+      - name: Cache dependencies
+        uses: actions/cache@v1
+        with:
+          path: ${{ steps.cache-env.outputs.dir }}
+          key: ${{ steps.cache-env.outputs.key }}
+          restore-keys: ${{ steps.cache-env.outputs.key }}
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extension: ${{ env.extensions }}
           coverage: xdebug
 
       - name: Install dependencies

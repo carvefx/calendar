@@ -12,7 +12,7 @@ class Calendar
      * The number of weeks a calendar month displays
      * (This includes blank days from other months)
      */
-    const WEEKS_IN_MONTH = 6;
+    public const WEEKS_IN_MONTH = 6;
 
     /**
      * @var int

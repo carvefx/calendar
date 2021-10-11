@@ -9,21 +9,21 @@ use PHPUnit\Framework\TestCase;
 
 class WeekTest extends TestCase
 {
-    function testSetsTheCurrentMonthToTheStartDatesMonthIfNoneIsSpecified()
+    public function testSetsTheCurrentMonthToTheStartDatesMonthIfNoneIsSpecified()
     {
         $start = new Day(2014, 7, 20);
         $week = new Week($start, null, CarbonInterface::SUNDAY);
         $this->assertSame(7, $week->getCurrentMonth());
     }
 
-    function testDetectsIfTheStartingDayIsNotTheFirstDayOfTheWeek()
+    public function testDetectsIfTheStartingDayIsNotTheFirstDayOfTheWeek()
     {
         $start = new Day(2014, 7, 1);
         $week = new Week($start, null, CarbonInterface::SUNDAY);
         $this->assertSame('2014-06-29', $week->getStartDate()->toDateString());
     }
 
-    function testSetsTheCurrentMonthToTheSpecifiedValue()
+    public function testSetsTheCurrentMonthToTheSpecifiedValue()
     {
         $start = new Day(2014, 7, 20);
         $currentMonth = 8;
@@ -32,7 +32,7 @@ class WeekTest extends TestCase
         $this->assertSame(8, $week->getCurrentMonth());
     }
 
-    function testReturnsTheDaysThatBelongToANormalWeek()
+    public function testReturnsTheDaysThatBelongToANormalWeek()
     {
         $start = new Day(2014, 7, 20);
         $week = new Week($start, null, CarbonInterface::SUNDAY);
@@ -44,7 +44,7 @@ class WeekTest extends TestCase
         $this->assertSame('2014-07-26', $days[6]->toDateString());
     }
 
-    function testChecksIfADayBelongsToTheCurrentMonth()
+    public function testChecksIfADayBelongsToTheCurrentMonth()
     {
         $start = new Day(2014, 7, 20);
         $currentMonth = 7;
@@ -53,7 +53,7 @@ class WeekTest extends TestCase
         $this->assertTrue($week->currentMonthDay($day));
     }
 
-    function testChecksIfADayDoesNotBelongToTheCurrentMonth()
+    public function testChecksIfADayDoesNotBelongToTheCurrentMonth()
     {
         $start = new Day(2014, 7, 20);
         $currentMonth = 7;
@@ -62,7 +62,7 @@ class WeekTest extends TestCase
         $this->assertFalse($week->currentMonthDay($day));
     }
 
-    function testReturnsTheDaysThatBelongToAWeekWithBlankDays()
+    public function testReturnsTheDaysThatBelongToAWeekWithBlankDays()
     {
         $start = new Day(2014, 6, 29);
         $currentMonth = 7;
@@ -82,7 +82,7 @@ class WeekTest extends TestCase
         $this->assertFalse($days[2]->isBlankDay());
     }
 
-    function testStartsOnCarbonsDefaultStartOfWeek()
+    public function testStartsOnCarbonsDefaultStartOfWeek()
     {
         $start = new Day(2017, 7, 1);
         $week = new Week($start, null, CarbonInterface::MONDAY);
@@ -91,7 +91,7 @@ class WeekTest extends TestCase
         $this->assertSame(CarbonInterface::MONDAY, $days[0]->dayOfWeek);
     }
 
-    function testStartsOnWhateverDayOfTheWeekCarbonDoes()
+    public function testStartsOnWhateverDayOfTheWeekCarbonDoes()
     {
         $start = new Day(2017, 7, 1);
         $week = new Week($start, null, CarbonInterface::SUNDAY);
@@ -100,7 +100,7 @@ class WeekTest extends TestCase
         $this->assertSame(CarbonInterface::SUNDAY, $days[0]->dayOfWeek);
     }
 
-    function testHandlesUsDaylightSavingsTimeStart()
+    public function testHandlesUsDaylightSavingsTimeStart()
     {
         $start = new Day(2017, 3, 12, 'America/New_York');
         $currentMonth = 11;
@@ -119,7 +119,7 @@ class WeekTest extends TestCase
         $this->assertSame('2017-03-18', $days[6]->toDateString());
     }
 
-    function testHandlesUsDaylightSavingsTimeEnd()
+    public function testHandlesUsDaylightSavingsTimeEnd()
     {
         $start = new Day(2017, 11, 5, 'America/New_York');
         $currentMonth = 11;
@@ -138,11 +138,11 @@ class WeekTest extends TestCase
         $this->assertSame('2017-11-11', $days[6]->toDateString());
     }
 
-    function testHandlesUkDaylightSavingsTimeStart()
+    public function testHandlesUkDaylightSavingsTimeStart()
     {
         $start = new Day(2017, 3, 26, 'Europe/London');
         $currentMonth = 9;
-        $week = new Week($start, $currentMonth,CarbonInterface::MONDAY);
+        $week = new Week($start, $currentMonth, CarbonInterface::MONDAY);
 
         $days = $week->getDays();
         $this->assertIsIterable($days);
@@ -157,7 +157,7 @@ class WeekTest extends TestCase
         $this->assertSame('2017-03-26', $days[6]->toDateString());
     }
 
-    function testHandlesUkDaylightSavingsTimeEnd()
+    public function testHandlesUkDaylightSavingsTimeEnd()
     {
         $start = new Day(2017, 10, 29, 'Europe/London');
         $currentMonth = 4;
@@ -176,7 +176,7 @@ class WeekTest extends TestCase
         $this->assertSame('2017-10-29', $days[6]->toDateString());
     }
 
-    function testHandlesNzDaylightSavingsTimeStart()
+    public function testHandlesNzDaylightSavingsTimeStart()
     {
         $start = new Day(2017, 9, 24, 'Pacific/Auckland');
         $currentMonth = 9;
@@ -195,7 +195,7 @@ class WeekTest extends TestCase
         $this->assertSame('2017-09-30', $days[6]->toDateString());
     }
 
-    function testHandlesNzDaylightSavingsTimeEnd()
+    public function testHandlesNzDaylightSavingsTimeEnd()
     {
         $start = new Day(2018, 4, 2, 'Pacific/Auckland');
         $currentMonth = 4;

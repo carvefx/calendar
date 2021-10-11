@@ -1,5 +1,11 @@
-[![Code Climate](https://codeclimate.com/github/kmdwebdesigns/calendar.png)](https://codeclimate.com/github/kmdwebdesigns/calendar)
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/004f9246-a92c-479a-a0e0-4564fe43eaa5/mini.png)](https://insight.sensiolabs.com/projects/004f9246-a92c-479a-a0e0-4564fe43eaa5)
+<!--
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/kmdwebdesigns/calendar.svg?style=flat-square)](https://packagist.org/packages/kmdwebdesigns/calendar)
+-->
+[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/kmdwebdesigns/calendar/run-tests?label=tests)](https://github.com/kmdwebdesigns/calendar/actions?query=workflow%3ATests+branch%3Amaster)
+[![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/kmdwebdesigns/calendar/Check%20&%20fix%20styling?label=code%20style)](https://github.com/kmdwebdesigns/calendar/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amaster)
+<!--
+[![Total Downloads](https://img.shields.io/packagist/dt/kmdwebdesigns/calendar.svg?style=flat-square)](https://packagist.org/packages/kmdwebdesigns/calendar)
+-->
 
 # Calendar
 
